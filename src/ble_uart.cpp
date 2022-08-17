@@ -1,16 +1,15 @@
 #include <Arduino.h>
 #include <NimBLEDevice.h>
-#include <esp_gap_ble_api.h>
-#include <esp_gattc_api.h>
-#include <esp_gatt_defs.h>
-#include <esp_bt_main.h>
-#include <esp_gatt_common_api.h>
+//#include <esp_gap_ble_api.h>
+//#include <esp_gattc_api.h>
+//#include <esp_gatt_defs.h>
+//#include <esp_bt_main.h>
+//#include <esp_gatt_common_api.h>
 #include "config.h"
 #include "ble_uart.h"
 
 
 #define SERVICE_UUID           "6E400001-B5A3-F393-E0A9-E50E24DCCA9E" // UART service UUID
-
 #define CHARACTERISTIC_UUID_RX "6E400002-B5A3-F393-E0A9-E50E24DCCA9E"
 #define CHARACTERISTIC_UUID_TX "6E400003-B5A3-F393-E0A9-E50E24DCCA9E"
 
@@ -24,7 +23,7 @@ static uint8_t ble_uart_nmea_checksum(const char *szNMEA);
 void ble_uart_init() {
 	NimBLEDevice::init("BLE-Vario");
 	NimBLEDevice::setMTU(46);
-	NimBLEDevice::setPower(ESP_PWR_LVL_N27);
+	NimBLEDevice::setPower(ESP_PWR_LVL_N9);
 	NimBLEDevice::setSecurityAuth(true, true, true);
 	NimBLEDevice::setSecurityPasskey(123456);
 	NimBLEDevice::setSecurityIOCap(BLE_HS_IO_DISPLAY_ONLY);
