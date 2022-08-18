@@ -12,7 +12,7 @@
 #define pinSCK		23	// SCL
 #define pinDRDYInt	19  // INT
 #define pinLED		2	// power-on and bluetooth active indication
-
+#define pinADC      14
 
 
 #define BTN_PCCA()  (digitalRead(pinPCCA) == HIGH ? 1 : 0)
@@ -80,6 +80,7 @@
 // COMPILED CONFIGURATION PARAMETERS ( cannot be changed with web configuration )
 
 #define BLE_TASK_PRIORITY		2
+#define BATT_TASK_PRIORITY 		3
 #define WIFI_CFG_TASK_PRIORITY	2
 #define VARIO_TASK_PRIORITY		(configMAX_PRIORITIES-1)
 

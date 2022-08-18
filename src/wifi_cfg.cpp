@@ -46,7 +46,7 @@ static String server_string_processor(const String& var){
         }
     else
     if(var == "BATTERY_VOLTAGE"){
-        return String(BatteryVoltage, 2);
+        return String(batteryLevel);
         }
 	else
 	if(var == "SSID"){

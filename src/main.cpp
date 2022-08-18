@@ -34,6 +34,7 @@ static void IRAM_ATTR drdy_interrupt_handler();
 static void vario_task(void *pvParameter);
 static void wifi_config_task(void *pvParameter);
 static void ble_task(void *pvParameter);
+static void BattTask(void *pvParameter);
 static void power_off();
 
 // This button has  different functions : program, configure, calibrate & audio toggle
@@ -85,10 +86,8 @@ void setup()
 	dbg_println(("\nLoad non-volatile configuration and calibration data from flash"));
 	nvd_config_load(Config);
 	nvd_calib_load(Calib);
-	// adc_init();
-	// int adcVal = adc_sample_average();
-	// BatteryVoltage = adc_battery_voltage(adcVal);
-	BatteryVoltage = 3.6;
+	xTaskCreate(BattTask, "BattTask", 2048, NULL, BATT_TASK_PRIORITY, NULL);
+	
 	bWebConfigure = false;
 	dbg_println(("To start web configuration mode, press and hold the PCC button"));
 	dbg_println(("until you hear a low-frequency tone. Then release the button"));
@@ -115,7 +114,7 @@ void setup()
 	{
 		dbg_println(("Vario mode"));
 		dbg_println(("\nAudio indication of battery voltage"));
-		ui_indicate_battery_voltage(BatteryVoltage);
+		//ui_indicate_battery_voltage(BatteryVoltage);
 		xTaskCreate(vario_task, "vario_task", 4096, NULL, VARIO_TASK_PRIORITY, NULL);
 	}
 	vTaskDelete(NULL);
@@ -143,11 +142,21 @@ static void ble_task(void *pvParameter)
 			LEDState = !LEDState;
 			digitalWrite(pinLED, LEDState);
 		}		
-		//BatteryVoltage = adc_battery_voltage();
-		BatteryVoltage = 3.6;
-		ble_uart_transmit_LK8EX1(AltitudeM, ClimbrateCps, BatteryVoltage);
+		
+		
+		ble_uart_transmit_LK8EX1(AltitudeM, ClimbrateCps, batteryLevel);
 		vTaskDelay(100 / portTICK_PERIOD_MS);
 	}
+}
+
+static void BattTask(void *pvParameter)
+{
+  adc_init();
+  while (1)
+  {
+    batteryLevel = adc_battery_level();
+    vTaskDelay(5000 / portTICK_PERIOD_MS);
+  }
 }
 
 static void wifi_config_task(void *pvParameter)
