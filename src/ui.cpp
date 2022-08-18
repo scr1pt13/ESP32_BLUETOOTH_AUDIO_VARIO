@@ -127,61 +127,7 @@ void ui_calibrate_gyro(CALIB_PARAMS_t &calib) {
 		audio_generate_tone(CALIBRATING_TONE_HZ/2, 1000);
 		}
 	}
-
-
 	
-#ifdef USE_9DOF_AHRS
-void ui_calibrate_accel_gyro_mag() {  
-	boolean bCalibrateAccel = false;
-	boolean bCalibrateMag = false;
-  	if ((Calib.axBias == 0) && (Calib.ayBias == 0) && (Calib.azBias == 0)) {
-    	dbg_println(("! Uncalibrated accelerometer !"));
-    	dbg_println(("Starting accelerometer calibration"));
-		ui_calibrate_accel(Calib);
-    	}
-  	if ((Calib.mxBias == 0) && (Calib.myBias == 0) && (Calib.mzBias == 0)) {
-    	dbg_println(("! Uncalibrated magnetometer !"));
-    	dbg_println(("Starting magnetometer calibration"));
-		ui_calibrate_mag(Calib);
-    	}
-
-	dbg_println(("Counting down to gyro calibration"));
-	dbg_println(("Press the PCCA button to enforce accelerometer & magnetometer calibration first"));
-	for (int inx = 0; inx < 5; inx++) {
-		delay(500); 
-		dbg_println((5-inx));
-		if (digitalRead(pinPCCA) == 0) {
-			bCalibrateAccel = true;
-			bCalibrateMag = true;
-			dbg_println(("PCCA button pressed"));
-			break;
-			}
-		}
-	if (bCalibrateAccel == true) {  
-		ui_calibrate_accel(Calib);
-		}
-	if (bCalibrateMag == true) {  
-		ui_calibrate_mag(Calib);
-		}
-	ui_calibrate_gyro(Calib);
-	}
-	
-
-void ui_calibrate_mag(CALIB_PARAMS_t &calib) {    
-    dbg_println(("-- Magnetometer calibration --"));
-    dbg_println(("Rotate unit in all orientations in a figure of 8 fashion"));
-    dbg_println(("Starting in 2 seconds."));
-    for (int inx = 0; inx < 10; inx++) {
-		delay(200); 
-		dbg_println((5-inx));
-		}
-    dbg_println(("\r\nCalibrating magnetometer"));
-    Imu.calibrate_mag(calib);
-    dbg_println(("Magnetometer calibration done"));
-    nvd_calib_store(calib);
-    }
-#else	
-
 // Vario will attempt to calibrate gyro each time on power up. If the vario is disturbed, it will
 // use the last saved gyro calibration values.
 // The software delays a few seconds so that the unit can be left undisturbed for gyro calibration.
@@ -222,4 +168,3 @@ void ui_calibrate_accel_gyro() {
 		}
 	ui_calibrate_gyro(Calib);
 	}
-#endif

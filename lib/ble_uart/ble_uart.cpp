@@ -30,13 +30,9 @@ void ble_uart_init() {
 
 	pBLEServer = NimBLEDevice::createServer();
 
-	pService          = pBLEServer->createService(SERVICE_UUID);
+	pService = pBLEServer->createService(SERVICE_UUID);
 	pTxCharacteristic = pService->createCharacteristic(CHARACTERISTIC_UUID_TX, NIMBLE_PROPERTY::NOTIFY);
-
-	pRxCharacteristic = pService->createCharacteristic(
-		CHARACTERISTIC_UUID_RX,
-		NIMBLE_PROPERTY::WRITE | NIMBLE_PROPERTY::WRITE_ENC | NIMBLE_PROPERTY::WRITE_AUTHEN);
-
+	pRxCharacteristic = pService->createCharacteristic(CHARACTERISTIC_UUID_RX, NIMBLE_PROPERTY::WRITE | NIMBLE_PROPERTY::WRITE_ENC | NIMBLE_PROPERTY::WRITE_AUTHEN);
 	pService->start();
 	pBLEServer->getAdvertising()->start();
 	}

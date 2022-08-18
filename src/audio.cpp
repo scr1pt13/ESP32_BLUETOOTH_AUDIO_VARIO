@@ -6,8 +6,7 @@ bool IsMuted = false;
 static void audio_tone(int freqHz, int milliseconds);
 
 static void audio_tone(int freqHz, int milliseconds) {
-	uint8_t channel = 0;
-	digitalWrite(pinAudioEn, 0);
+	uint8_t channel = 0;	
 	ledcAttachPin(pinAudio, channel);
 	ledcWriteTone(channel, freqHz);
 	delay(milliseconds);
@@ -16,8 +15,7 @@ static void audio_tone(int freqHz, int milliseconds) {
 
 
 void audio_off() {
-	uint8_t channel = 0;
-	digitalWrite(pinAudioEn, 1);
+	uint8_t channel = 0;	
 	ledcWrite(channel, 0);
 	ledcDetachPin(pinAudio);
 	pinMode(pinAudio, OUTPUT);
@@ -37,8 +35,7 @@ void audio_set_frequency(int freqHz) {
 	if (!IsMuted) {
 		uint8_t channel = 0;
 		ledcAttachPin(pinAudio, channel);
-		if (freqHz > 0) {
-			digitalWrite(pinAudioEn, 0);
+		if (freqHz > 0) {			
 			ledcWriteTone(channel, freqHz);	
 			}
 		else {
@@ -48,8 +45,6 @@ void audio_set_frequency(int freqHz) {
 	}
 
 
-void audio_generate_tone(int freqHz, int ms) {
-	digitalWrite(pinAudioEn, 0);
-	audio_tone(freqHz, ms);
-	digitalWrite(pinAudioEn, 1);
+void audio_generate_tone(int freqHz, int ms) {	
+	audio_tone(freqHz, ms);	
 	}

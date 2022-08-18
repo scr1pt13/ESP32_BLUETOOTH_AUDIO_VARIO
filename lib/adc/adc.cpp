@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <driver/adc.h>
-#include "config.h"
+#include <config.h>
 #include "adc.h"
 
 float BatteryVoltage;

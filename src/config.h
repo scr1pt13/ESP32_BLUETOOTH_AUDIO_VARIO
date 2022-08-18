@@ -2,20 +2,16 @@
 #define CONFIG_H_
 
 
-#define pinPCCA		18	// program/configure/calibrate/audio button
+#define pinPCCA		4	// program/configure/calibrate/audio button
 #define pinAudio	15	// pwm beeper audio output
-#define pinAudioEn	2	// 74HC240 output enables, active low
-
-#define pinPwrSens	5	// detect power on/off button press
-#define pinPwrCtrl	17	// power on/off
 
 #define pinCSB		21	// CSB (ms5611)
-#define pinMISO		1	// SDO ms5611 & AD0 mpu9250
-#define pinNCS		3 	// NCS (mpu9250)
+#define pinMISO		18	// SDO ms5611 & AD0 mpu9250
+#define pinNCS		5 	// NCS (mpu9250)
 #define pinMOSI		22	// SDA
 #define pinSCK		23	// SCL
 #define pinDRDYInt	19  // INT
-#define pinLED		8	// power-on and bluetooth active indication
+#define pinLED		2	// power-on and bluetooth active indication
 
 
 
@@ -34,7 +30,7 @@
 // audio tones. Between the sink threshold and the zero threshold,
 // the vario is quiet
 
-#define VARIO_CLIMB_THRESHOLD_CPS_DEFAULT  	50
+#define VARIO_CLIMB_THRESHOLD_CPS_DEFAULT  	30
 #define VARIO_CLIMB_THRESHOLD_CPS_MIN   	20
 #define VARIO_CLIMB_THRESHOLD_CPS_MAX   	100
 
@@ -42,7 +38,7 @@
 #define VARIO_ZERO_THRESHOLD_CPS_MIN    	-20
 #define VARIO_ZERO_THRESHOLD_CPS_MAX    	20
 
-#define VARIO_SINK_THRESHOLD_CPS_DEFAULT  	-250
+#define VARIO_SINK_THRESHOLD_CPS_DEFAULT  	-200
 #define VARIO_SINK_THRESHOLD_CPS_MIN    	-400
 #define VARIO_SINK_THRESHOLD_CPS_MAX    	-100
 
@@ -50,7 +46,7 @@
 // frequency bandwidth to climbrates below this crossover threshold 
 // so you have more frequency discrimination. So set the crossover threshold 
 // to the average thermal core climbrate you expect for the site and conditions.
-#define VARIO_CROSSOVER_CPS_DEFAULT     400
+#define VARIO_CROSSOVER_CPS_DEFAULT     600
 #define VARIO_CROSSOVER_CPS_MIN         300
 #define VARIO_CROSSOVER_CPS_MAX         600
 
@@ -83,9 +79,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // COMPILED CONFIGURATION PARAMETERS ( cannot be changed with web configuration )
 
-//#define USE_9DOF_AHRS
-
-#define PWR_CTRL_TASK_PRIORITY	1
 #define BLE_TASK_PRIORITY		2
 #define WIFI_CFG_TASK_PRIORITY	2
 #define VARIO_TASK_PRIORITY		(configMAX_PRIORITIES-1)
@@ -121,7 +114,7 @@
 // if you find that gyro calibration fails even when you leave
 // the unit undisturbed, increase this offset limit
 // until you find that gyro calibration works consistently.
-#define GYRO_OFFSET_LIMIT_1000DPS   200
+#define GYRO_OFFSET_LIMIT_1000DPS   500
 
 // print debug information to the serial port for different code modules
 
