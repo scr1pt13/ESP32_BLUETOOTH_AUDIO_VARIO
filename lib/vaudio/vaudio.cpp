@@ -1,14 +1,15 @@
 #include <Arduino.h>
-#include "config.h"
-#include "nvd.h"
-#include "audio.h"
-#include "util.h"
+#include <config.h>
+#include <nvd.h>
+#include <audio.h>
 #include "vaudio.h"
 
 typedef struct BEEP_ {
     int periodTicks;  // on-time + off-time
     int endTick; // on-time
 } BEEP;
+
+#define CLAMP(x,mn,mx)       {if (x <= (mn)) x = (mn); else if (x >= (mx)) x = (mx);}
 
 // clamp climbrate/sinkrate for audio feedback to +/- 10 m/s
 #define VARIO_MAX_CPS         1000

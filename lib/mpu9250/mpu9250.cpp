@@ -1,11 +1,9 @@
 #include <Arduino.h>
-#include "config.h"
-#include "spi.h"
-#include "util.h"
-#include "audio.h"
+#include <config.h>
+#include <spi.h>
+#include <audio.h>
+#include <nvd.h>
 #include "mpu9250.h"
-#include "nvd.h"
-
 
 MPU9250::MPU9250() {	
 	// example accel biases valid for accelerometer full scale = +/- 4G

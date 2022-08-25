@@ -1,7 +1,7 @@
 #ifndef UI_H_
 #define UI_H_
 
-#include "config.h"
+#include <config.h>
 
 extern volatile bool BtnPCCAPressed;
 extern volatile bool BtnPCCALongPress;

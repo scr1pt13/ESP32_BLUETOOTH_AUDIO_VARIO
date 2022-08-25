@@ -2,20 +2,19 @@
 #include <Wire.h>
 #include <FS.h>
 #include <LittleFS.h>
-#include "config.h"
-#include "spi.h"
-#include "util.h"
-#include "imu.h"
-#include "mpu9250.h"
-#include "ms5611.h"
-#include "kalmanfilter4d.h"
-#include "audio.h"
-#include "vaudio.h"
+#include <config.h>
+#include <spi.h>
+#include <imu.h>
+#include <mpu9250.h>
+#include <ms5611.h>
+#include <kalmanfilter4d.h>
+#include <audio.h>
+#include <vaudio.h>
 #include <adc.h>
-#include "nvd.h"
-#include "ringbuf.h"
-#include "wifi_cfg.h"
-#include "ui.h"
+#include <nvd.h>
+#include <ringbuf.h>
+#include <wificfg.h>
+#include <ui.h>
 #include <ble_uart.h>
 
 const char *FwRevision = "0.99";
@@ -36,6 +35,9 @@ static void wifi_config_task(void *pvParameter);
 static void ble_task(void *pvParameter);
 static void BattTask(void *pvParameter);
 static void power_off();
+
+#define ABS(x)                 ((x) < 0 ? -(x) : (x))
+#define F_TO_I(x)  ( (x) >= 0.0f ? (int32_t)((x) + 0.5f) : (int32_t)((x) - 0.5f) )
 
 // This button has  different functions : program, configure, calibrate & audio toggle
 // 1. Program

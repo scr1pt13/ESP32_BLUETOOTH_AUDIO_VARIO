@@ -1,8 +1,6 @@
 #include <Arduino.h>
-#include <math.h>
-#include "config.h"
+#include <config.h>
 #include "imu.h"
-#include "util.h"
 
 //#define twoKpDef (2.0f * 5.0f) // 2 * proportional gain
 //#define twoKiDef (2.0f * 0.0f)	// 2 * integral gain

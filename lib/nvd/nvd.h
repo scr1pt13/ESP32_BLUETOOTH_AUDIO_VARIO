@@ -1,7 +1,7 @@
 #ifndef NVD_H_
 #define NVD_H_
 
-#include "config.h"
+#include <config.h>
 
 typedef struct  {
 	int16_t  axBias;

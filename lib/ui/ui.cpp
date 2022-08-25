@@ -1,11 +1,11 @@
 #include <Arduino.h>
 #include <Ticker.h>
-#include "config.h"
-#include "audio.h"
-#include "adc.h"
-#include "nvd.h"
+#include <config.h>
+#include <audio.h>
+#include <adc.h>
+#include <nvd.h>
+#include <mpu9250.h>
 #include "ui.h"
-#include "mpu9250.h"
 
 Ticker     Tickr;
 

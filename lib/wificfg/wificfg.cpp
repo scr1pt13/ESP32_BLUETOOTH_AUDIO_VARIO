@@ -7,10 +7,10 @@
 #include <AsyncElegantOTA.h>
 #include <ESPmDNS.h>
 #include <esp_wifi.h>
-#include "config.h"
-#include "nvd.h"
-#include "adc.h"
-#include "wifi_cfg.h"
+#include <config.h>
+#include <nvd.h>
+#include <adc.h>
+#include "wificfg.h"
 
 static const char* TAG = "wificfg";
 

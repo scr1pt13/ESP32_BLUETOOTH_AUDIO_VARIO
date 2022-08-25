@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#include "config.h"
-#include "spi.h"
+#include <config.h>
+#include <spi.h>
 #include "ms5611.h"
 
 MS5611::MS5611() {
@@ -9,56 +9,6 @@ MS5611::MS5611() {
 	altitudeCmAvg = 0.0f;
 	temperatureC = 0;
 	}
-
-#if 0	
-
-#define MAX_TEST_SAMPLES    100
-static float pa[MAX_TEST_SAMPLES];
-static float z[MAX_TEST_SAMPLES];
-
-void MS5611::measure_noise(int nSamples) {
-	int n;
-    float paMean, zMean, zVariance, paVariance;
-    paMean = 0.0f;
-    zMean = 0.0f;
-    paVariance = 0.0f;
-    zVariance = 0.0f;
-	n = 5;
-	//  throwaway samples
-    while (n--) {
-    	trigger_temperature_sample();
-    	delay(MS5611_SAMPLE_PERIOD_MS);
-		D2 = read_sample();
-		trigger_pressure_sample();
-		delay(MS5611_SAMPLE_PERIOD_MS);
-		D1 = read_sample();
-		}
-    for (n = 0; n < nSamples; n++) {
-	    trigger_temperature_sample();
-	    delay(MS5611_SAMPLE_PERIOD_MS);
-	    D2 = read_sample();
-	    calculate_temperatureCx10();
-		trigger_pressure_sample();
-		delay(MS5611_SAMPLE_PERIOD_MS);
-		D1 = read_sample();
-		pa[n] = calculate_pressurePa();
-        z[n] =  pa_to_cm(pa[n]);
-        paMean += pa[n];
-        zMean += z[n];
-        }
-    paMean /= nSamples;
-    zMean /= nSamples;
-    dbg_printf(("paMean = %dPa, zMean = %dcm\n",(int)paMean,(int)zMean));
-    for (n = 0; n < nSamples; n++) {
-        paVariance += (pa[n]-paMean)*(pa[n]-paMean);
-        zVariance += (z[n]-zMean)*(z[n]-zMean);
-        //dbg_printf(("%d %d\r\n",(int)pa[n],(int)z[n]));
-       }
-    paVariance /= (nSamples-1);
-    zVariance /= (nSamples-1);
-    dbg_printf(("\npaVariance %d  zVariance %d\n",(int)paVariance, (int)zVariance));
-	}
-#endif
 
 void MS5611::averaged_sample(int nSamples) {
 	int32_t tc,tAccum,n;

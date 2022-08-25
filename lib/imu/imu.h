@@ -14,6 +14,8 @@
 #ifndef IMU_H_
 #define IMU_H_
 
+#define _180_DIV_PI         57.295779f
+#define ABS(x)                 ((x) < 0 ? -(x) : (x))
 // quaternion of sensor frame relative to auxiliary frame
 extern volatile float Q0, Q1, Q2, Q3;
 

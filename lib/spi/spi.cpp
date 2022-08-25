@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#include <SPI.h>
-#include "config.h"
+#include "SPI.h"
+#include <config.h>
 #include <esp_system.h>
 #include <driver/spi_master.h>
 #include <driver/gpio.h>

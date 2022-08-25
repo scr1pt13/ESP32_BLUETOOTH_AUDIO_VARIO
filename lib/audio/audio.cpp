@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "config.h"
+#include <config.h>
 #include "audio.h"
 
 bool IsMuted = false;

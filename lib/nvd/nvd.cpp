@@ -1,11 +1,13 @@
 #include <Arduino.h>
 #include <Preferences.h>
-#include "config.h"
+#include <config.h>
 #include "nvd.h"
-#include "util.h"
+
 
 #define MODE_READ_WRITE  false
 #define MODE_READ_ONLY   true
+
+#define CLAMP(x,mn,mx)       {if (x <= (mn)) x = (mn); else if (x >= (mx)) x = (mx);}
 
 // saves and retrieve non-volatile data (NVD) in flash memory
 Preferences Prefs;

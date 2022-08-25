@@ -1,8 +1,9 @@
 #ifndef _MPU9250_H_
 #define _MPU9250_H_
 
-#include "nvd.h"
+#include <nvd.h>
 
+#define ABS(x)                 ((x) < 0 ? -(x) : (x))
 #define R_SMPLRT_DIV	0x19
 #define R_CONFIG		0x1A
 	#define GYRO_DLPF_184	0x01
